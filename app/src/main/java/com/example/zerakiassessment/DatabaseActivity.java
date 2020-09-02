@@ -46,12 +46,11 @@ public class DatabaseActivity {
             create.executeUpdate();
 
             /* #######------- STRING FOR COLLECTING QUERY -----#######*/
-        String slectQuerry="SELECT COUNT(*) AS students, c.NAME AS course \n" +
-                "FROM education e\n" +
-                "JOIN course c\n" +
-                "JOIN institution i\n" +
-                "ON e.course = c.id\n" +
-                "GROUP BY e.NAME";
+        String slectQuerry="SELECT MAX(education) AS course, COUNT(student) AS students\n" +
+                "    FROM education\n" +
+                "    LEFT JOIN education ON education.course = education.course\n" +
+                "    LEFT JOIN education ON education.institution=education.institution\n" +
+                "    GROUP BY education.id ";
 
         }catch (Exception e){
             System.out.println(e);
