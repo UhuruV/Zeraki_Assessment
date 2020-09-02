@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
+import static android.icu.text.MessagePattern.ArgType.SELECT;
+import static java.time.ZoneOffset.MAX;
+
 public class DatabaseActivity {
 
     public static void main(String[] args) throws Exception {
@@ -32,15 +35,24 @@ public class DatabaseActivity {
         return null;
     }
     public static void createTable() throws Exception{
-        try{
-            Connection conn=getConnection();
+        try {
+            Connection conn = getConnection();
             assert conn != null;
-            PreparedStatement create= conn.prepareStatement("CREATE TABLE IF NOT EXISTS education( id int NOT NULL AUTO_INCREMENT," +
-                    "student varchar(255)," +
-                    "course varchar(255)," +
+            PreparedStatement create = conn.prepareStatement("CREATE TABLE IF NOT EXISTS education( id int NOT NULL AUTO_INCREMENT," +
+                    "student varchar(255) not null," +
+                    "course varchar(255) not null," +
                     "institution varchar(255)),PRIMARY KE(id)" +
                     "");
             create.executeUpdate();
+
+            /* #######------- STRING FOR COLLECTING QUERY -----#######*/
+        String slectQuerry="SELECT COUNT(*) AS students, c.NAME AS course \n" +
+                "FROM education e\n" +
+                "JOIN course c\n" +
+                "JOIN institution i\n" +
+                "ON e.course = c.id\n" +
+                "GROUP BY e.NAME";
+
         }catch (Exception e){
             System.out.println(e);
         }finally {
