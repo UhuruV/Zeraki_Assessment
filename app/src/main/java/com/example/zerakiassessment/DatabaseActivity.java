@@ -24,10 +24,10 @@ public class DatabaseActivity {
             final String INSTITUTION = "institution";
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection(STUDENT,COURSE,INSTITUTION);
-            System.out.println("Openning a connection");
+            System.out.println("Opening a connection");
             return connection;
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("Oops! Something went wrong");
         }
         return null;
     }
@@ -50,7 +50,7 @@ public class DatabaseActivity {
                 "    GROUP BY education.id ";
 
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("Oops! Something went wrong");
         }finally {
             System.out.println("Table has been created!");
         }
