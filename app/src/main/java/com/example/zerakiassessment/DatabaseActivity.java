@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
-import static android.icu.text.MessagePattern.ArgType.SELECT;
-import static java.time.ZoneOffset.MAX;
-
 public class DatabaseActivity {
 
     public static void main(String[] args) throws Exception {
@@ -46,7 +43,7 @@ public class DatabaseActivity {
             create.executeUpdate();
 
             /* #######------- STRING FOR COLLECTING QUERY -----#######*/
-        String slectQuerry="SELECT MAX(education) AS course, COUNT(student) AS students\n" +
+        String selectQuerry="SELECT MAX(education) AS course, COUNT(student) AS students\n" +
                 "    FROM education\n" +
                 "    LEFT JOIN education ON education.course = education.course\n" +
                 "    LEFT JOIN education ON education.institution=education.institution\n" +
